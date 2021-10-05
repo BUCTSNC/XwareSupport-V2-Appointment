@@ -53,9 +53,13 @@
 			cancelConfirm(){
 				this.$emit("startCancel",this.UUID,this.timeSlot,this.problemType)
 			},
+			//修改预约信息
 			alterInfo(){
 				uni.navigateTo({
 					url: `../alterAppointmentInfo/alterAppointmentInfo?uuid=${this.UUID}`,
+					fail: (res) => {
+						console.log("alter:",res)
+					}
 				})
 			}
 		},
