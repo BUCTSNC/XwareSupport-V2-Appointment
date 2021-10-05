@@ -110,10 +110,11 @@
 				} else {
 					return this.$store.state.preSetProblemType
 				}
-			},
-			personalInfo() {
-				
 			}
+			// ,
+			// personalInfo() {
+				
+			// }
 		},
 		methods: {
 			timeSlotConfirm(res) {

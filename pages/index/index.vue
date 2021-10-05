@@ -33,6 +33,9 @@
 		methods: {
 			personalInfomation(){
 				console.log("跳转个人信息页")
+				uni.redirectTo({
+					url:"../personalInfoSelect/personalInfoSelect"
+				})
 			},
 			startMakeAppointment(){
 				uni.redirectTo({
