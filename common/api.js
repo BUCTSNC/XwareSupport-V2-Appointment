@@ -18,12 +18,14 @@ const install = (Vue,vm) =>{
 		return vm.$u.get("/Appointment",{uuid})
 	}
 	let cancelAppointment = (uuid)=>{
-		return vm.$u.get(`/delModAppointment?uuid=${uuid}`)
+		return vm.$u.delete(`/Appointment?uuid=${uuid}`)
 	}
-	//##
 	let modifyAppointment = (data)=>{
-		return vm.$u.post(`/delModAppointment`,data)
+		return vm.$u.put(`/Appointment`,data)
 	}
+	// let getPersonalInfoFromDB = (data)=>{
+	// 	return vm.$u.get(`/getPersonalInfoFromDB`,data)
+	// }
 	vm.$u.api = {
 		login,
 		problemTypeList,
@@ -32,7 +34,8 @@ const install = (Vue,vm) =>{
 		getAppointmentList,
 		getAppointmentDetail,
 		cancelAppointment,
-		modifyAppointment
+		modifyAppointment,
+		// getPersonalInfoFromDB
 	}
 }
 export default {

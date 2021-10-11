@@ -91,7 +91,9 @@
 		onLoad() {
 			this.loadTimeSlot()
 			this.loadProblemTypes()
-
+			//核心代码
+			this.$store.state.selectPersonalInfoId = -1
+			
 		},
 		onShow() {
 			if (this.$store.state.selectPersonalInfoId != -1) {
@@ -123,7 +125,7 @@
 			},
 			loadTimeSlot() {
 				this.$u.api.timeSlotList().then(res => {
-					console.log(res)
+					// console.log(res)
 					if(res.code != 200||res.data.length == 0){
 						this.$refs.uTips.show({
 							title: "当前无可预约时间段",
@@ -157,7 +159,7 @@
 				})
 			},
 			loadProblemTypes() {
-				console.log(this.ProblemType)
+				// console.log(this.ProblemType)
 				this.problemTypes = []
 				for (let item of this.ProblemType) {
 					let children = []

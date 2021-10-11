@@ -61,6 +61,7 @@
 					problemType: "",
 					problemDetail: "",
 				},
+				storeTimeSlot: "",
 				appointmentDetail:null,
 				personalInfo:null,
 				timeSlot: [],
@@ -99,12 +100,13 @@
 			}
 			this.uuid = params['uuid']
 			this.$u.api.getAppointmentDetail(params['uuid']).then(res=>{
-				console.log(res)
+				// console.log("getAppointment:",res.data)
 				this.appointmentDetail = res.data
+				this.storeTimeSlot = res.data.timeSlot
 			})
 			this.loadTimeSlot()
 			this.loadProblemTypes()
-
+			this.getPersonalInfo()
 		},
 		onShow() {
 			if (this.$store.state.selectPersonalInfoId != -1) {
@@ -130,13 +132,40 @@
 			// }
 		},
 		methods: {
+			//new add
+			//get personalInfo from database
+			getPersonalInfo(){
+				// this.$u.api.getPersonalInfoFromDB({
+				// 	uuid: this.uuid
+				// }).then(res=>{
+				// 	// console.log("getPersonalInfo_success:",res)
+				// 	this.personalInfo = res.data.personalInfo
+				// 	this.form.problemType = res.data.problemType
+				// 	this.form.problemDetail = res.data.describe
+				// 	this.form.timeSlotId = res.data.timeSlotId
+				// 	this.selectedTimeSlot = this.storeTimeSlot
+				// 	console.log("123",this.personalInfo)
+					
+				// }),
+				
+				this.$u.api.getAppointmentDetail(this.uuid).then(res=>{
+					this.form.timeSlotId = res.data.id
+					this.form.problemDetail = res.data.describe
+					this.form.problemType = res.data.problemType
+					this.personalInfo = res.data.sourcesInfo
+					this.selectedTimeSlot = res.data.timeSlot
+				})
+				
+				
+			},
 			timeSlotConfirm(res) {
+				//console.log(res)
 				this.form.timeSlotId = res[1].value
 				this.selectedTimeSlot = res[1].extra
 			},
 			loadTimeSlot() {
 				this.$u.api.timeSlotList().then(res => {
-					console.log(res)
+					// console.log("loadTimeSlot:",res)
 					if(res.code != 200||res.data.length == 0){
 						this.$refs.uTips.show({
 							title: "当前无可预约时间段",
@@ -170,7 +199,7 @@
 				})
 			},
 			loadProblemTypes() {
-				console.log(this.ProblemType)
+				// console.log(this.ProblemType)
 				this.problemTypes = []
 				for (let item of this.ProblemType) {
 					let children = []
@@ -189,7 +218,7 @@
 			},
 			problemTypeConfirm(res) {
 				if (res[0].extra) {
-					console.log("弹提示")
+					// console.log("弹提示")
 				}
 				this.form.problemType = res[1].extra
 			},
@@ -257,8 +286,9 @@
 			},
 			chooseInfo() {
 				uni.navigateTo({
-					url: "../personalInfoSelect/personalInfoSelect"
+					url: `../alterPersonalInfoSelect/alterPersonalInfoSelect?uuid=${this.uuid}&&name=${this.personalInfo.name}&&phone=${this.personalInfo.phone}&&stuNO=${this.personalInfo.stuNO}`
 				})
+				
 			}
 		}
 	}

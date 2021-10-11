@@ -38,7 +38,7 @@
 				})
 			},
 			select(index){
-				console.log(index)
+				// console.log(index)
 				this.$store.commit("setSelectPersonalInfoId",index)
 				uni.navigateBack()
 			},
