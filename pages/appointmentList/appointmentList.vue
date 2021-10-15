@@ -142,6 +142,7 @@
 						this.doing = []
 						this.finish = []
 						this.all = res.data
+						if(this.all.length == 0) return 0
 						for(let item of res.data){
 							if(item.status === 1){
 								this.upcoming.push(item)

@@ -32,7 +32,9 @@
 		},
 		methods: {
 			personalInfomation(){
-				console.log("跳转个人信息页")
+				uni.redirectTo({
+					url:"../personalInfoSelect/personalInfoSelect?judge=false"
+				})
 			},
 			startMakeAppointment(){
 				uni.redirectTo({

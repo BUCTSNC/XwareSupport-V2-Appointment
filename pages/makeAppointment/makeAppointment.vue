@@ -60,7 +60,6 @@
 					problemType: "",
 					problemDetail: "",
 				},
-				personalInfo:null,
 				timeSlot: [],
 				selectedTimeSlot: "",
 				timeSlotShow: false,
@@ -93,12 +92,7 @@
 			this.loadProblemTypes()
 
 		},
-		onShow() {
-			if (this.$store.state.selectPersonalInfoId != -1) {
-				this.personalInfo = uni.getStorageSync("personalInfo")[this.$store.state.selectPersonalInfoId]
-			}
-			
-		},
+
 		onReady() {
 			this.$refs.uForm.setRules(this.rules);
 			this.windowHeight = uni.getSystemInfoSync().windowHeight
@@ -112,13 +106,17 @@
 				}
 			},
 			personalInfo() {
-				
+				if (this.$store.state.selectPersonalInfoId == -1) {
+					return null
+				}
+				return uni.getStorageSync("personalInfo")[this.$store.state.selectPersonalInfoId]
 			}
 		},
 		methods: {
 			timeSlotConfirm(res) {
 				this.form.timeSlotId = res[1].value
 				this.selectedTimeSlot = res[1].extra
+				//console.log(res)
 			},
 			loadTimeSlot() {
 				this.$u.api.timeSlotList().then(res => {
@@ -235,12 +233,11 @@
 					problemType: "",
 					problemDetail: "",
 				}
-				this.selectedTimeSlot = ""
 				this.$refs.uForm.resetFields()
 			},
 			chooseInfo() {
 				uni.navigateTo({
-					url: "../personalInfoSelect/personalInfoSelect"
+					url: "../personalInfoSelect/personalInfoSelect?page=makeAppointment"
 				})
 			}
 		}

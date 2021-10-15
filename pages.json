@@ -65,8 +65,15 @@
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }
-            
         }
+		,{
+			"path" : "pages/alterInfoSelect/alterInfoSelect",
+			"style" :
+			{
+				"navigationBarTitleText":"",
+				"enablePullDownRefresh": false
+			}
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

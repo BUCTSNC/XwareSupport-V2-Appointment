@@ -20,6 +20,9 @@ const install = (Vue,vm) =>{
 	let cancelAppointment = (uuid)=>{
 		return vm.$u.delete(`/Appointment?uuid=${uuid}`)
 	}
+	let alterAppointment = (data)=>{
+		return vm.$u.put(`/Appointment`,data)
+	}
 	vm.$u.api = {
 		login,
 		problemTypeList,
@@ -27,7 +30,8 @@ const install = (Vue,vm) =>{
 		makeAppointment,
 		getAppointmentList,
 		getAppointmentDetail,
-		cancelAppointment
+		cancelAppointment,
+		alterAppointment
 	}
 }
 export default {

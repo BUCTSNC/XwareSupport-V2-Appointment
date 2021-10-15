@@ -2,8 +2,7 @@
 	<view class="content">
 		<view class="list" v-if="allInfo&&allInfo.length!=0">
 			<personalInfoCard v-for="(item,index) in allInfo" :info="item" :key="index" :index="index" @delete="del"
-			@click="select"
-			>
+			@click="select">
 			</personalInfoCard>
 		</view>
 		<view class="empty" v-else :style="{height:windowHeight+'px'}">
@@ -25,11 +24,16 @@
 			return {
 				allInfo: [],
 				windowHeight: 0,
+				page: null,
 			};
 		},
 		onShow() {
 			this.windowHeight = uni.getSystemInfoSync().windowHeight
 			this.allInfo = uni.getStorageSync("personalInfo")
+			console.log(this.allInfo)
+		},
+		onLoad(e) {
+			this.page = e.page
 		},
 		methods: {
 			addMore() {
@@ -38,9 +42,16 @@
 				})
 			},
 			select(index){
-				console.log(index)
-				this.$store.commit("setSelectPersonalInfoId",index)
-				uni.navigateBack()
+				if(this.page == "makeAppointment"){
+					console.log("make")
+					this.$store.commit("setSelectPersonalInfoId",index)
+					uni.navigateBack()
+				}
+				else if(this.page == "alterAppointmentInfo"){
+					console.log("alter")
+					this.$store.commit("setAlterPersonalInfo",this.allInfo[index])
+					uni.navigateBack()
+				}
 			},
 			del(index){
 				this.allInfo.splice(index,1);

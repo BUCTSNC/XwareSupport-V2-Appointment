@@ -23,6 +23,7 @@ const config = {
 		],
 		activeProblemType:[],
 		selectPersonalInfoId:-1,
+		alterPersonalInfo:{},
     },
 	mutations:{
 		setActiveProblemType(state,problemTypes){
@@ -30,6 +31,9 @@ const config = {
 		},
 		setSelectPersonalInfoId(state,newId){
 			state.selectPersonalInfoId = newId
+		},
+		setAlterPersonalInfo(state,alterInfo){
+			state.alterPersonalInfo = alterInfo
 		}
 	}
 }
