@@ -23,7 +23,6 @@
 			this.windowHeight = uni.getSystemInfoSync().windowHeight
 		},
 		onLoad(params) {
-			
 			if(!params||!params['uuid']){
 				uni.navigateBack({
 					delta:1,
@@ -32,7 +31,7 @@
 			}
 			this.uuid = params['uuid']
 			this.$u.api.getAppointmentDetail(params['uuid']).then(res=>{
-				console.log(res)
+				// console.log(res)
 				this.appointmentDetail = res.data
 			})
 			this.$refs.qrcode.make({

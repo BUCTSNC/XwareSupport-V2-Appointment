@@ -152,7 +152,7 @@
 							}
 						}
 					}
-					console.log(this.all)
+					// console.log(this.all)
 				})
 			},
 			preCancel(uuid,timeSlot,problemType){

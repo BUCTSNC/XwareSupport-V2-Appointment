@@ -72,6 +72,7 @@
 			};
 		},
 		onLoad(params) {
+			// console.log("editing start")
 			this.windowHeight = uni.getSystemInfoSync().windowHeight
 			this.allInfo = uni.getStorageSync("personalInfo")
 			if(!(this.allInfo instanceof Array)){
