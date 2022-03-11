@@ -13,7 +13,7 @@
 							<view class="name">{{personalInfo.name}}</view>
 							<view class="phone">{{personalInfo.phoneNumber}}</view>
 						</view>
-						<view class="bot">
+						<view class="bot" v-if="reserveID==100">
 							<view>{{personalInfo.stuNO}}</view>
 						</view>
 					</view>
@@ -66,6 +66,7 @@
 				timeSlotShow: false,
 				problemTypes: [],
 				problemTypeShow: false,
+				reserveID:99,
 				rules: {
 					timeSlotId: [{
 						required: true,
@@ -93,6 +94,11 @@
 			this.loadProblemTypes()
 			//核心代码
 			this.$store.state.selectPersonalInfoId = -1
+
+			let that = this
+			this.$u.api.getID().then(res=>{
+				that.reserveID = res.data
+			})
 			
 		},
 		onShow() {

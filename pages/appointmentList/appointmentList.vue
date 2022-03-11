@@ -28,6 +28,7 @@
 					:name="item.name"
 					:stuNO="item.stuNO"
 					:timeSlot="item.timeSlot"
+					:reserveID="reserveID"
 					@startCancel="preCancel"
 					></appointment-card>
 				</scroll-view>
@@ -44,6 +45,7 @@
 					:name="item.name"
 					:stuNO="item.stuNO"
 					:timeSlot="item.timeSlot"
+					:reserveID="reserveID"
 					@startCancel="preCancel"
 					></appointment-card>
 				</scroll-view>
@@ -60,6 +62,7 @@
 					:name="item.name"
 					:stuNO="item.stuNO"
 					:timeSlot="item.timeSlot"
+					:reserveID="reserveID"
 					@startCancel="preCancel"
 					></appointment-card>
 				</scroll-view>
@@ -76,6 +79,7 @@
 					:name="item.name"
 					:stuNO="item.stuNO"
 					:timeSlot="item.timeSlot"
+					:reserveID="reserveID"
 					@startCancel="preCancel"
 					></appointment-card>
 				</scroll-view>
@@ -95,6 +99,7 @@
 				modalShow:false,
 				alarmText:"",
 				cancelUUID:"",
+				reserveID:99,
 				tabList:[
 					{
 						name:"待服务",
@@ -117,6 +122,12 @@
 				all:[],
 				swiperHeight:0,
 			};
+		},
+		onLoad(){
+			let that = this
+			this.$u.api.getID().then(res=>{
+				that.reserveID = res.data
+			})
 		},
 		onShow() {
 			this.swiperHeight = uni.getSystemInfoSync().windowHeight - 40

@@ -13,7 +13,7 @@
 							<view class="name">{{personalInfo.name}}</view>
 							<view class="phone">{{personalInfo.phoneNumber}}</view>
 						</view>
-						<view class="bot">
+						<view class="bot" v-if="reserveID==100">
 							<view>{{personalInfo.stuNO}}</view>
 						</view>
 					</view>
@@ -69,6 +69,7 @@
 				timeSlotShow: false,
 				problemTypes: [],
 				problemTypeShow: false,
+				reserveID: 99,
 				rules: {
 					timeSlotId: [{
 						required: true,
@@ -98,6 +99,11 @@
 				})
 				return;
 			}
+			let that = this
+			this.$u.api.getID().then(res=>{
+				that.reserveID = res.data
+			})
+			
 			this.uuid = params['uuid']
 			this.$u.api.getAppointmentDetail(params['uuid']).then(res=>{
 				// console.log("getAppointment:",res.data)

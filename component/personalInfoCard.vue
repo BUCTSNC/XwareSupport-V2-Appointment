@@ -14,7 +14,7 @@
 						<view class="name">{{info.name}}</view>
 						<view class="phone">{{info.phone}}</view>
 					</view>
-					<view class="bot">
+					<view class="bot" v-if="reserveID==100">
 						<view>{{info.stuNO}}</view>
 					</view>
 				</view>
@@ -32,6 +32,10 @@
 				required:true,
 			},
 			index:{
+				type:Number,
+				required:true,
+			},
+			reserveID:{
 				type:Number,
 				required:true,
 			}
@@ -102,6 +106,7 @@
 			}
 			.bot{
 				color: $u-main-color;
+				text-align: left;
 			}
 		}
 	}

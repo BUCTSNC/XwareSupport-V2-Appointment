@@ -17,7 +17,8 @@
 			</view>
 			<view class="info">
 				<text class="title">申请人</text>
-				<text class="detail">{{stuNO}} - {{name}}</text>
+				<text class="detail" v-if="reserveID==100">{{stuNO}} - {{name}}</text>
+				<text class="detail" v-else>{{name}}</text>
 			</view>
 			<view class="info">
 				<text class="title">预约状态</text>
@@ -27,7 +28,7 @@
 		<view slot="foot" class="foot">
 			<u-button v-if="status==1" class="btn" type="error" shape="circle" size="mini" plain ripple @click="cancelConfirm">取消预约</u-button>
 			<u-button v-if="status==1" class="btn" type="primary" shape="circle" size="mini" plain ripple @click="alterInfo" >修改信息</u-button>
-			<u-button v-if="status==4" class="btn" type="primary" shape="circle" size="mini" plain ripple>评价</u-button>
+			<!-- <u-button v-if="status==4" class="btn" type="primary" shape="circle" size="mini" plain ripple>评价</u-button> -->
 		</view>
 	</u-card>
 </template>
@@ -91,6 +92,10 @@
 			ID: {
 				type: Number,
 				required: true,
+			},
+			reserveID:{
+				type:Number,
+				required:true,
 			}
 		},
 		computed: {

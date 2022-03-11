@@ -9,7 +9,7 @@
 						<u-avatar bg-color="#ecf5ff" :text="personalInfos.name[0]"></u-avatar>
 						<view class="name">{{personalInfos.name}}</view>
 					</view>
-					<view class="right">
+					<view class="right" v-if="reserveID==100">
 						<view class="top">
 							<view class="phone">电话:</view>
 							<view class="phone2">{{personalInfos.phone}}</view>
@@ -25,7 +25,7 @@
 		</view>
 		<view class="list1" v-if="allInfo&&allInfo.length!=0">
 			<u-button class="head"  shape="circle" size="mini" plain ripple>可选择预约人信息</u-button>
-			<personalInfoCard v-for="(item,index) in allInfo" :info="item" :key="index" :index="index" @delete="del"
+			<personalInfoCard v-for="(item,index) in allInfo" :info="item" :key="index" :index="index" :reserveID="reserveID" @delete="del" 
 			@click="select"
 			>
 			</personalInfoCard>
@@ -50,6 +50,7 @@
 				uid:'',
 				allInfo: [],
 				windowHeight: 0,
+				reserveID: 99,
 				personalInfos:{
 					name:'',
 					phone:'',
@@ -69,6 +70,10 @@
 				this.personalInfos.phone = params['phone']
 				this.personalInfos.stuNO = params['stuNO']
 				console.log("this.uid:",this.uid,"this.personalinfos:",this.personalInfos)
+				let that = this
+				this.$u.api.getID().then(res=>{
+					that.reserveID = res.data
+				})
 			},
 			addMore() {
 				uni.navigateTo({
@@ -88,16 +93,7 @@
 				}else if(this.$store.state.selectPersonalInfoId > index){
 					this.$store.commit("setSelectPersonalInfoId",this.$store.state.selectPersonalInfoId - 1)
 				}
-			},
-			// getPersonalInfo(){
-			// 	this.$u.api.getPersonalInfoFromDB({
-			// 		uuid: this.uid
-			// 	}).then(res=>{
-			// 		this.personalInfos.name = res.data.personalInfo.name
-			// 		this.personalInfos.phone = res.data.personalInfo.phone
-			// 		this.personalInfos.stuNO = res.data.personalInfo.stuNO
-			// 	})
-			// },
+			}
 		}
 	}
 </script>

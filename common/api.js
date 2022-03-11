@@ -23,9 +23,9 @@ const install = (Vue,vm) =>{
 	let modifyAppointment = (data)=>{
 		return vm.$u.put(`/Appointment`,data)
 	}
-	// let getPersonalInfoFromDB = (data)=>{
-	// 	return vm.$u.get(`/getPersonalInfoFromDB`,data)
-	// }
+	let getID = ()=>{
+		return vm.$u.get(`/getID`)
+	}
 	vm.$u.api = {
 		login,
 		problemTypeList,
@@ -35,7 +35,7 @@ const install = (Vue,vm) =>{
 		getAppointmentDetail,
 		cancelAppointment,
 		modifyAppointment,
-		// getPersonalInfoFromDB
+		getID,
 	}
 }
 export default {

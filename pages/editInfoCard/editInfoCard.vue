@@ -5,13 +5,13 @@
 				<u-form-item label="姓名" prop="name" left-icon="account">
 					<u-input v-model="form.name" placeholder="请输入姓名"></u-input>
 				</u-form-item>
-				<u-form-item label="学号" prop="stuNO" left-icon="info">
+				<u-form-item label="学号" prop="stuNO" left-icon="info" v-if="reserveID==100">
 					<u-input v-model="form.stuNO" placeholder="请输入学号"></u-input>
 				</u-form-item>
 				<u-form-item label="手机号" prop="phone" left-icon="phone">
 					<u-input v-model="form.phone" placeholder="请输入手机号"></u-input>
 				</u-form-item>
-				<u-form-item label="专业" prop="major" left-icon="edit-pen">
+				<u-form-item label="专业" prop="major" left-icon="edit-pen" v-if="reserveID==100">
 					<u-input v-model="form.major" placeholder="请输入专业"></u-input>
 				</u-form-item>
 			</u-form>
@@ -30,6 +30,7 @@
 					phone: "",
 					major: "",
 				},
+				reserveID:99,
 				rules: {
 					stuNO: [{
 							required: true,
@@ -72,7 +73,6 @@
 			};
 		},
 		onLoad(params) {
-			// console.log("editing start")
 			this.windowHeight = uni.getSystemInfoSync().windowHeight
 			this.allInfo = uni.getStorageSync("personalInfo")
 			if(!(this.allInfo instanceof Array)){
@@ -83,6 +83,10 @@
 				this.id = Number.parseInt(params.id)
 				this.form = this.allInfo[this.id]
 			}
+			let that = this
+			this.$u.api.getID().then(res=>{
+				that.reserveID = res.data
+			})
 		},
 		methods: {
 			save() {

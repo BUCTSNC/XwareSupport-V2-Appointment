@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<view class="list" v-if="allInfo&&allInfo.length!=0">
-			<personalInfoCard v-for="(item,index) in allInfo" :info="item" :key="index" :index="index" @delete="del"
+			<personalInfoCard v-for="(item,index) in allInfo" :info="item" :key="index" :index="index" @delete="del" :reserveID="reserveID"
 			@click="select"
 			>
 			</personalInfoCard>
@@ -25,7 +25,14 @@
 			return {
 				allInfo: [],
 				windowHeight: 0,
+				reserveID:99,
 			};
+		},
+		onLoad(){
+			let that = this
+			this.$u.api.getID().then(res=>{
+				that.reserveID = res.data
+			})
 		},
 		onShow() {
 			this.windowHeight = uni.getSystemInfoSync().windowHeight
